@@ -70,14 +70,14 @@ def main():
         return df_income
 
     @st.cache_data
-    def load_prediction(_sample, _id, _clf):
+    def load_prediction(sample, id, clf):
         X=sample.iloc[:, :-1]
-        score = clf.predict_proba(X[X.index == int(_id)])[:,1]
+        score = clf.predict_proba(X[X.index == int(id)])[:,1]
         return score
 
     @st.cache_data
-    def load_kmeans(_sample, _id, _mdl):
-        index = sample[sample.index == int(_id)].index.values
+    def load_kmeans(sample, id, mdl):
+        index = sample[sample.index == int(id)].index.values
         index = index[0]
         data_client = pd.DataFrame(sample.loc[sample.index, :])
         df_neighbors = pd.DataFrame(knn.fit_predict(data_client), index=data_client.index)
